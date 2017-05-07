@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import './css/App.css';
+import './css/app.css';
 
 import App from './components/App';
 
