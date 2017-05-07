@@ -1,0 +1,10 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/dynamodb-viewer
+    docker:
+      - image: node:6.10.2-slim
+    steps:
+      - checkout
+      - run: yarn install
+      - run: yarn run build
