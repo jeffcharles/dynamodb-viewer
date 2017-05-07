@@ -6,5 +6,9 @@ jobs:
       - image: node:6.10.2-slim
     steps:
       - checkout
+      - restore_cache:
+          key: depsl-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - run: yarn install
+      - save_cache:
+          key: depsl-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - run: yarn run build
