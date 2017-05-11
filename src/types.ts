@@ -7,5 +7,6 @@ export interface Configuration {
 
 export interface Record {
   data: any,
-  key: string
+  key: any,
+  name: string
 }
