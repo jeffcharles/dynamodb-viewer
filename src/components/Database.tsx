@@ -49,7 +49,7 @@ export default class extends React.Component<{dynamodb: AWS.DynamoDB}, DatabaseS
     return itemsResult.Items!;
   }
 
-  async onTableSelected(table: string) {
+  async loadTable(table: string) {
     this.setState({ selectedTable: table });
     const [rawRecords, description] = await Promise.all([this.fetchRecords(table), this.describeTable(table)]);
     const records = rawRecords.map(record => ({ key: key(record, description), data: record }));
@@ -60,13 +60,13 @@ export default class extends React.Component<{dynamodb: AWS.DynamoDB}, DatabaseS
     const tables = this.state.tables && <Tables
           tables={this.state.tables}
           selectedTable={this.state.selectedTable}
-          onTableSelected={table => this.onTableSelected(table)}
+          onTableSelected={table => this.loadTable(table)}
           onRefresh={() => this.fetchTables()} />;
     const rows = this.state.selectedTableRecords && <Records
       records={this.state.selectedTableRecords}
       onRefresh={() => {
         if (this.state.selectedTable) {
-          this.fetchRecords(this.state.selectedTable);
+          this.loadTable(this.state.selectedTable);
         }}} />;
     return (
       <div>
